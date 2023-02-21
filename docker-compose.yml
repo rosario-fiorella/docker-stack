@@ -1,0 +1,45 @@
+version: "3.9"
+services:
+  php81:
+    container_name: php81
+    image: php81:0.0.1
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+    environment:
+      DB_HOST: db
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: localdev
+      XDEBUG_MODE: develop,debug
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - "./src:/var/www/html"
+      - "./data/conf/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+      - "./data/conf/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
+  db:
+    container_name: db
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: localdev
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - "./data/mysql_57:/var/lib/mysql"
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: "phpmyadmin"
+    restart: always
+    links:
+      - db
+    depends_on:
+      - db
+    ports:
+      - 8081:80
