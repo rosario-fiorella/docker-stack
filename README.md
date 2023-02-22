@@ -3,15 +3,15 @@
 Classic AMP stack, basic docker image with "apache", "mysql", "php" and developer tools enabled by default "composer", "xdebug".
 
 
-First step build imagev by command:
+First step build image by command:
 
 ```
-sudo docker image build -t php81:0.0.1 .
+docker image build -t php81:0.0.1 .
 ```
 
 Next step
 ```
-sudo docker compose up -d
+docker compose up -d
 ```
 
 Finally
