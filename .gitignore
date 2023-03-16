@@ -1,4 +1,5 @@
 src
 .vscode
-data/*
-!data/conf
+data/mysql_57/*
+!data/mysql_57/.gitkeep
+data/nginx/log/*.log

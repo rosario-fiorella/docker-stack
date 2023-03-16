@@ -1,25 +1,43 @@
-version: "3.9"
+version: "3.3"
 services:
-  php81:
-    container_name: php81
-    image: php81:0.0.2
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - "./src:/var/www/html"
+      - "./data/nginx/conf/fastcgi.conf:/etc/nginx/conf.d/extra-fastcgi.conf"
+      - "./data/nginx/conf/default.conf:/etc/nginx/conf.d/default.conf"
+      - "./data/nginx/log/access.log:/var/log/nginx/access.log"
+      - "./data/nginx/log/error.log:/var/log/nginx/error.log"
+    links:
+      - "app"
+
+  app:
+    container_name: app
+    image: php8:0.0.1
     restart: always
     depends_on:
       - db
+    links:
+      - db
+      - redis
+      - solr
     ports:
-      - 8080:80
+      - 8082:8082
     environment:
-      DB_HOST: db
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: localdev
+      MYSQL_DB_HOST: db
+      MYSQL_DB_USER: user
+      MYSQL_DB_PASSWORD: password
+      MYSQL_DB_NAME: localdev
       XDEBUG_MODE: develop,debug
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
       - "./src:/var/www/html"
-      - "./data/conf/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
-      - "./data/conf/000-default.conf:/etc/apache2/sites-enabled/000-default.conf"
+      - "./data/apache/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini"
+
   db:
     container_name: db
     image: mysql:5.7
@@ -33,6 +51,7 @@ services:
       - 3306:3306
     volumes:
       - "./data/mysql_57:/var/lib/mysql"
+
   phpmyadmin:
     container_name: phpmyadmin
     image: "phpmyadmin"
@@ -42,4 +61,39 @@ services:
     depends_on:
       - db
     ports:
-      - 8081:80
+      - 8888:80
+
+  solr:
+    container_name: solr
+    image: solr:latest
+    ports:
+      - 8983:8983
+    command: "solr-precreate collection"
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    network_mode: bridge
+    restart: always
+    environment:
+      ALLOW_EMPTY_PASSWORD: yes
+    volumes: 
+      - redis:/data
+      - "./data/redis/config/sysctl.conf:/etc/sysctl.conf"
+
+  redis-commander:
+    container_name: redis-gui
+    image: rediscommander/redis-commander:latest
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+    links:
+      - redis
+
+volumes:
+  db:
+    driver: local
+  redis:
+    driver: bridge
