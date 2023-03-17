@@ -1,13 +1,20 @@
-# AMP
+# NGINX REVERSE-PROXY PHP-FPM
 
-Classic AMP stack, basic docker image with "apache", "mysql", "php" and developer tools enabled by default "composer", "xdebug".
+## DOCKER STACK:
+- NGINX REVERSE PROXY
+- PHP-FPM
+- REDIS
+- REDIS-COMMANDER
+- MYSQL
+- PHPMYADMIN
+- SOLR
 
-
-First step build image by command:
+First step build PHP-FPM image by command:
 
 ```
-docker image build -t php81:0.0.1 .
+docker image build -t php8:0.0.1 .
 ```
+Many tools like like **Composer, Xdebug, Git** are already enabled
 
 Next step
 ```
@@ -16,7 +23,9 @@ docker compose up -d
 
 Finally
 open in browser
-- localdev: http://localhost:8080/
-- phpmyadmin: http://localhost:8081/
+- NGINX PHP-FPM http://localhost:8080
+- REDIS http://localhost:8081
+- PHPMYADMIN http://localhost:8888
+- SOLR http://localhost:8983
 
 Enjoi!
