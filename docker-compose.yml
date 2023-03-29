@@ -73,12 +73,10 @@ services:
   redis:
     container_name: redis
     image: redis:latest
-    network_mode: bridge
     restart: always
     environment:
       ALLOW_EMPTY_PASSWORD: yes
-    volumes: 
-      - redis:/data
+    volumes:
       - "./data/redis/config/sysctl.conf:/etc/sysctl.conf"
 
   redis-commander:
@@ -95,5 +93,3 @@ services:
 volumes:
   db:
     driver: local
-  redis:
-    driver: bridge
