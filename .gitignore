@@ -2,4 +2,3 @@ src
 .vscode
 data/mysql_57/*
 !data/mysql_57/.gitkeep
-data/nginx/log/*.log
