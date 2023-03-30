@@ -1,5 +1,8 @@
-src
 .vscode
+src
+!src/index.php
+!src/health.php
 data/mysql_57/*
 !data/mysql_57/.gitkeep
-*.log
+data/nginx/log
+!data/nginx/log/.gitkeep
