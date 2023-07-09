@@ -20,6 +20,25 @@ Next step
 ```
 docker compose up -d
 ```
+## XDEBUG
+create file launch.json
+```
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003,
+            "pathMappings": {
+                "/var/www/html": "${workspaceRoot}\\src"
+            },
+            "log": true
+        }
+    ]
+}
+```
 
 Finally
 open in browser
