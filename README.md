@@ -12,9 +12,9 @@
 First step build PHP-FPM image by command:
 
 ```
-docker image build -t php8:0.0.1 .
+docker image build --progress=plain --no-cache -t php8:0.0.1 .
 ```
-Many tools like like **Composer, Xdebug, Git** are already enabled
+Many tools like **Composer, Xdebug, Git** are already enabled
 
 Next step
 ```
