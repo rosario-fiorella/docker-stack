@@ -11,7 +11,7 @@ try {
 }
 
 try {
-    $pdo = new PDO('mysql:host=db;dbname=', 'user', 'password');
+    $pdo = new PDO('mysql:host=db;dbname=localdev', 'user', 'password');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     showHealth('PDO', 'ok');
@@ -24,7 +24,7 @@ try {
         'hostname' => 'solr',
         'port' => 8983,
         'path' => 'solr/collection',
-        'wt' => 'xml'
+        'wt' => 'json'
     ];
 
     $solr_client = new SolrClient($options);

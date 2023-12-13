@@ -14,7 +14,7 @@ First step build PHP-FPM image by command:
 ```
 docker image build --progress=plain --no-cache -t php8:0.0.1 .
 ```
-Many tools like **Composer, Xdebug, Git** are already enabled
+Many tools like **Composer, Xdebug, Git, Opcache** are already enabled
 
 Next step
 ```

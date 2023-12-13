@@ -1,30 +1,28 @@
-FROM php:8-fpm
+FROM php:8.2-fpm
 
-    # locale-strings
-RUN apt-get update && apt-get install -y locales \
-    && dpkg-reconfigure locales \
-    && apt-get update && apt-get install -y libicu-dev \
-	&& docker-php-ext-configure intl \
-    && docker-php-ext-install intl \
-    && apt-get update && apt-get install -y libonig-dev \
-    && docker-php-ext-install -j$(nproc) gettext mbstring \
-    # composer
-    && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
-    && php composer-setup.php \
-    && php -r "unlink('composer-setup.php');" \
-    && mv composer.phar /usr/local/bin/composer \
-    # git
-    && apt-get update && apt-get install -y git \
-    # pdo-mysql
-    && docker-php-ext-install mysqli pdo pdo_mysql \
-    # xdebug
-    && pecl install xdebug && docker-php-ext-enable xdebug \
-    # php-redis
-    && pecl install redis && docker-php-ext-enable redis.so \
-    # php-solr
-    && apt-get update && apt-get install -y libcurl4-gnutls-dev \
-    && apt-get update && apt-get install -y libxml2-dev \
-    && pecl install solr && docker-php-ext-enable solr.so
+RUN apt-get update && apt-get install -y \
+ # libs
+ locales locales-all zlib1g-dev libicu-dev libssl-dev git libcurl4-gnutls-dev libxml2-dev \
+ # locale
+ && locale-gen \
+ && docker-php-ext-configure intl \
+ && docker-php-ext-configure gettext \
+ && docker-php-ext-install intl gettext \
+ # composer
+ && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
+ && php composer-setup.php \
+ && php -r "unlink('composer-setup.php');" \
+ && mv composer.phar /usr/local/bin/composer \
+ # pdo-mysql
+ && docker-php-ext-install mysqli pdo pdo_mysql \
+ # xdebug
+ && pecl install xdebug && docker-php-ext-enable xdebug \
+ # php-redis
+ && pecl install redis && docker-php-ext-enable redis.so \
+ # php-solr
+ && pecl install solr && docker-php-ext-enable solr.so \
+ # opcache
+ && docker-php-ext-install opcache
 
 USER www-data
 
