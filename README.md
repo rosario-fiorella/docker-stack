@@ -4,7 +4,7 @@
 - Docker version 26.1.3, build b72abbb
 - Docker Compose version v2.27.0
 
-## DOCKER STACK:
+## DOCKER STACK
 - NGINX REVERSE PROXY
 - PHP-FPM
 - REDIS
