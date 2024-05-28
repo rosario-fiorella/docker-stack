@@ -4,6 +4,10 @@
 - Docker version 26.1.3, build b72abbb
 - Docker Compose version v2.27.0
 
+## STACK
+- [NGINX + PHP-FPM](#docker-stack)
+- [Wordpress + WP-Cli](#wordpress)
+
 ## DOCKER STACK
 - NGINX REVERSE PROXY
 - PHP-FPM
@@ -30,7 +34,7 @@ to stop docker services
 docker compose down
 ```
 
-## XDEBUG
+### XDEBUG
 create file **launch.json**
 ```
 {
@@ -59,5 +63,21 @@ open in browser
 
 Check the status of the services
 - open url http://localhost:8080/health.php
+
+## WORDPRESS
+
+to start wordpress services 
+```
+docker compose -f docker-compose-wordpress.yml up -d
+```
+to stop docker services
+```
+docker compose down
+```
+Finally
+open in browser
+- WORDPRESS http://localhost
+- WP-CLI, first enter the container ``docker exec -it wp /bin/bash``, then run from within the container ``wp --help``
+- PHPMYADMIN http://localhost:8888
 
 Enjoi!

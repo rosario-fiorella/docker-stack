@@ -2,6 +2,8 @@
 src
 !src/index.php
 !src/health.php
+data/db/*
+!data/db/.gitkeep
 data/mysql_57/*
 !data/mysql_57/.gitkeep
 data/nginx/log

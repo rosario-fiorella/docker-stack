@@ -1,0 +1,79 @@
+services:
+
+  db:
+    container_name: db
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+    expose:
+      - 3306
+    volumes:
+      - ./data/db:/var/lib/mysql
+    networks:
+      - wp-network
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8888:80
+    networks:
+      - wp-network
+
+  wordpress:
+    container_name: wp
+    image: wordpress
+    restart: always
+    user: www-data:www-data
+    depends_on:
+      - db
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+    volumes:
+      - ./src/wordpress:/var/www/html
+    networks:
+      - wp-network
+
+  wpcli:
+    container_name: wp-cli
+    image: wordpress:cli
+    restart: always
+    stdin_open: true
+    tty: true
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: user
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD: password
+      WORDPRESS_TABLE_PREFIX: wp_
+      WORDPRESS_DEBUG: 1
+    entrypoint: ["wp", "--allow-root"]
+    depends_on:
+      - db
+      - wordpress
+    volumes:
+      - ./src/wordpress:/var/www/html
+    networks:
+      - wp-network
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  wp-network:
+    driver: bridge
