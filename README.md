@@ -1,5 +1,9 @@
 # NGINX REVERSE-PROXY PHP-FPM
 
+## REQUIREMENTS
+- Docker version 26.1.3, build b72abbb
+- Docker Compose version v2.27.0
+
 ## DOCKER STACK:
 - NGINX REVERSE PROXY
 - PHP-FPM
@@ -20,6 +24,12 @@ Next step
 ```
 docker compose up -d
 ```
+
+to stop docker services
+```
+docker compose down
+```
+
 ## XDEBUG
 create file **launch.json**
 ```
@@ -46,5 +56,8 @@ open in browser
 - ```REDIS``` http://localhost:8081
 - ```PHPMYADMIN``` http://localhost:8888
 - ```SOLR``` http://localhost:8983
+
+Check the status of the services
+- open url http://localhost:8080/health.php
 
 Enjoi!
