@@ -1,0 +1,7 @@
+{
+    "require": {
+        "phpstan/phpstan": "^1.0",
+        "squizlabs/php_codesniffer": "^3.0",
+        "phpunit/phpunit": "^10.0"
+    }
+}

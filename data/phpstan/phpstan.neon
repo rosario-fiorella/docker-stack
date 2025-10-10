@@ -1,0 +1,7 @@
+parameters:
+  paths:
+    - .
+  excludePaths:
+    analyse:
+      - vendor/*
+      - tests/*

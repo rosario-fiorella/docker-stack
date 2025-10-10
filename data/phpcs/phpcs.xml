@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<ruleset name="ProjectRules">
+    <!-- Descrizione del ruleset -->
+    <description>Regole personalizzate per PHP CodeSniffer nel progetto</description>
+
+    <!-- Standard di base da ereditare -->
+    <rule ref="PSR12" />
+
+    <!-- File e cartelle da ignorare -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/cache/*</exclude-pattern>
+
+    <!-- Regole personalizzate/esclusioni specifiche -->
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120" />
+            <property name="absoluteLineLimit" value="150" />
+        </properties>
+    </rule>
+
+    <rule ref="Generic.Functions.FunctionLength">
+        <properties>
+            <property name="maximumFunctionLength" value="100" />
+        </properties>
+    </rule>
+
+    <!-- Escludi una specifica regola -->
+    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
+        <severity>0</severity>
+    </rule>
+
+</ruleset>

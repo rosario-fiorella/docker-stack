@@ -1,8 +1,8 @@
 # NGINX REVERSE-PROXY PHP-FPM
 
 ## REQUIREMENTS
-- Docker version 26.1.3, build b72abbb
-- Docker Compose version v2.27.0
+- Docker version 28.5.1, build e180ab8
+- Docker Compose version v2.40.0
 
 ## STACK
 - [NGINX + PHP-FPM](#docker-stack)
@@ -20,9 +20,9 @@
 First step build PHP-FPM image by command:
 
 ```
-docker image build --progress=plain --no-cache -t php8:0.0.1 .
+docker image build --progress=plain --no-cache -t php84:0.0.1 .
 ```
-Many tools like **Composer, Xdebug, Git, Opcache** are already enabled
+Many tools like **Composer, Curl, Git, Intl, Opcache, PHP_CodeSniffer, PHPStan, PHPUnit, Unzip, Xdebug, Wget, Zip** are already enabled
 
 Next step
 ```
@@ -32,6 +32,29 @@ docker compose up -d
 to stop docker services
 ```
 docker compose down
+```
+
+## TOOLS
+
+### Composer
+Global installation available here: ```/root/.composer/vendor```
+```
+composer --version
+```
+
+### PHPCS
+```
+phpcs --version
+```
+
+### HPStan
+```
+phpstan --version
+```
+
+### PHPUnit
+```
+phpunit --version
 ```
 
 ### XDEBUG
