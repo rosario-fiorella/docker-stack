@@ -2,12 +2,14 @@ FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
  # libs
- locales locales-all zlib1g-dev libicu-dev libssl-dev git libcurl4-gnutls-dev libxml2-dev \
+ locales locales-all zlib1g-dev libicu-dev libssl-dev git libcurl4-gnutls-dev libxml2-dev zip unzip libzip-dev \
  # locale
  && locale-gen \
  && docker-php-ext-configure intl \
  && docker-php-ext-configure gettext \
  && docker-php-ext-install intl gettext \
+ # zip
+ && docker-php-ext-install zip
  # composer
  && php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
  && php composer-setup.php \
