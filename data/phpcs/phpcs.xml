@@ -1,31 +1,33 @@
 <?xml version="1.0"?>
-<ruleset name="ProjectRules">
-    <!-- Descrizione del ruleset -->
-    <description>Regole personalizzate per PHP CodeSniffer nel progetto</description>
+<ruleset name="BasePHPStandard">
+    <description>Generic base rules for PHP projects</description>
 
-    <!-- Standard di base da ereditare -->
+    <!-- Include PSR12 standard for modern PHP style rules -->
     <rule ref="PSR12" />
 
-    <!-- File e cartelle da ignorare -->
-    <exclude-pattern>*/vendor/*</exclude-pattern>
-    <exclude-pattern>*/cache/*</exclude-pattern>
+    <!-- Include generic rules provided by PHP_CodeSniffer -->
+    <rule ref="Generic" />
 
-    <!-- Regole personalizzate/esclusioni specifiche -->
-    <rule ref="Generic.Files.LineLength">
-        <properties>
-            <property name="lineLimit" value="120" />
-            <property name="absoluteLineLimit" value="150" />
-        </properties>
-    </rule>
+    <!-- Exclude scanning of irrelevant folders -->
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>node_modules/*</exclude-pattern>
+    <exclude-pattern>storage/*</exclude-pattern>
+    <exclude-pattern>bootstrap/cache/*</exclude-pattern>
 
-    <rule ref="Generic.Functions.FunctionLength">
-        <properties>
-            <property name="maximumFunctionLength" value="100" />
-        </properties>
-    </rule>
+    <!-- Include typical PHP and related files -->
+    <file>./app</file>
+    <file>./src</file>
+    <file>./tests</file>
+    <file>./modules</file>
+    <file>./themes</file>
+    <file>./includes</file>
+    <file>./wp-content</file>
 
-    <!-- Escludi una specifica regola -->
-    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace">
+    <!-- Limit file extensions to scan -->
+    <arg name="extensions" value="php,inc,module,install,test,profile,theme,css,info,txt,yml" />
+
+    <!-- Disable rule that disallows long array syntax to avoid false positives -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax">
         <severity>0</severity>
     </rule>
 

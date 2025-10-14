@@ -1,7 +1,16 @@
 parameters:
+  level: max
   paths:
-    - .
+    - src
+    - app
   excludePaths:
-    analyse:
-      - vendor/*
-      - tests/*
+    - cache
+    - tests
+    - vendor
+  inferPrivatePropertyTypeFromConstructor: true
+  checkMissingIterableValueType: true
+  checkMissingVarTagTypehint: true
+  checkUnionTypes: true
+  checkExplicitMixed: true
+  checkMissingCallableSignature: true
+  checkClassCaseSensitivity: true
