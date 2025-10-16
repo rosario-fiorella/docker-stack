@@ -47,7 +47,7 @@ composer --version
 phpcs --version
 ```
 
-### HPStan
+### PHPStan
 ```
 phpstan --version
 ```
