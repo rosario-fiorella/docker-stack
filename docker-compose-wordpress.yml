@@ -10,8 +10,6 @@ services:
       MYSQL_ROOT_PASSWORD: password
     expose:
       - 3306
-    volumes:
-      - ./data/db:/var/lib/mysql
     networks:
       - wp-network
 
@@ -44,6 +42,9 @@ services:
       WORDPRESS_DEBUG: 1
     volumes:
       - ./src/wordpress:/var/www/html
+      - ./src/comblock-html:/var/www/html/wp-content/plugins/comblock-html
+      - ./src/comblock-login:/var/www/html/wp-content/plugins/comblock-login
+      - ./src/comblock-rental:/var/www/html/wp-content/plugins/comblock-rental
     networks:
       - wp-network
 
