@@ -22,7 +22,7 @@ First step build PHP-FPM image by command:
 ```
 docker image build --progress=plain --no-cache -t php84:0.0.1 .
 ```
-Many tools like **Composer, Curl, Git, Intl, Opcache, PHP_CodeSniffer, PHPStan, PHPUnit, Unzip, Xdebug, Wget, Zip** are already enabled
+Many tools like **Composer, Curl, Git, Intl, Nano, Opcache, PHPCS, PHPStan, PHPUnit, Unzip, Xdebug, Wget, Zip** are already enabled
 
 Next step
 ```
@@ -35,6 +35,10 @@ docker compose down
 ```
 
 ## TOOLS
+Log in to the Docker container as the ```root``` user.
+```
+docker exec -it --user root app /bin/bash
+```
 
 ### Composer
 Global installation available here: ```/root/.composer/vendor```

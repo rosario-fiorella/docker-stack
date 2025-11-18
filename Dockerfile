@@ -4,7 +4,7 @@ FROM php:8.4-fpm
 RUN apt-get update && apt-get install -y --no-install-recommends \
     locales locales-all \
     zlib1g-dev libicu-dev libssl-dev git libcurl4-gnutls-dev libxml2-dev zip unzip libzip-dev \
-    curl wget autoconf build-essential \
+    curl wget autoconf build-essential nano \
  && locale-gen en_US.UTF-8 \
  # Configure and install PHP extensions
  && docker-php-ext-configure intl \
