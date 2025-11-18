@@ -1,5 +1,4 @@
 services:
-
   db:
     container_name: db
     image: mysql
@@ -69,6 +68,17 @@ services:
       - ./src/wordpress:/var/www/html
     networks:
       - wp-network
+
+  composer:
+    container_name: composer
+    image: composer:latest
+    working_dir: /var/www/html
+    volumes:
+      - ./src/wordpress:/var/www/html
+      - ./data/composer/composer-wordpress.json:/var/www/html/composer.json
+    networks:
+      - wp-network
+    restart: "no"
 
 volumes:
   db:

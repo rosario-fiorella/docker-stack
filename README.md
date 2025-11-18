@@ -101,6 +101,35 @@ to stop docker services
 ```
 docker compose down
 ```
+## TOOLS
+
+### PHPCS + WPCS Setup
+
+Access the Composer Docker container by running
+```
+docker compose -f docker-compose-wordpress.yml run --rm composer bash
+```
+Check the installed version of composer:
+```
+composer --version
+```
+Run the command to install dependencies with Composer:
+```
+composer install
+```
+Check the installed version of PHP Code Sniffer with:
+```
+./vendor/bin/phpcs --version
+```
+Run PHP Code Sniffer (PHPCS) with the WordPress standard on a specific plugin, for example `my-plugin`:
+```
+./vendor/bin/phpcs --standard=WordPress ./wp-content/plugins/my-plugin --report=full
+```
+To automatically fix coding issues, use PHP Code Beautifier and Fixer (PHPCBF):
+```
+./vendor/bin/phpcbf --standard=WordPress ./wp-content/plugins/my-plugin
+```
+
 Finally
 open in browser
 - WORDPRESS http://localhost
