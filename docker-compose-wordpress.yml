@@ -8,6 +8,8 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - ./data/mysql_wp:/var/lib/mysql
     ports:
       - 3306:3306
     networks:
