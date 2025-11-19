@@ -129,11 +129,19 @@ To automatically fix coding issues, use PHP Code Beautifier and Fixer (PHPCBF):
 ```
 ./vendor/bin/phpcbf --standard=WordPress ./wp-content/plugins/my-plugin
 ```
+### WP-CLI
+Access the WP-CLI Docker container by running
+```
+docker exec -it wp-cli /bin/bash
+```
+then run from within the container
+```
+wp --help
+```
 
 Finally
 open in browser
 - WORDPRESS http://localhost
-- WP-CLI, first enter the container ``docker exec -it wp /bin/bash``, then run from within the container ``wp --help``
 - PHPMYADMIN http://localhost:8888
 
 Enjoi!
