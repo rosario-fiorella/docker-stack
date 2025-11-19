@@ -1,20 +1,20 @@
 services:
   db:
-    container_name: db
-    image: mysql
+    container_name: wp-db
+    image: mysql:latest
     restart: always
     environment:
       MYSQL_DATABASE: wordpress
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
-    expose:
-      - 3306
+    ports:
+      - 3306:3306
     networks:
       - wp-network
 
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: wp-pma
     image: phpmyadmin
     restart: always
     depends_on:
@@ -71,7 +71,7 @@ services:
       - wp-network
 
   composer:
-    container_name: composer
+    container_name: wp-composer
     image: composer:latest
     working_dir: /var/www/html
     volumes:
