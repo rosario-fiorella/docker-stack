@@ -99,7 +99,7 @@ docker compose -f docker-compose-wordpress.yml up -d
 ```
 to stop docker services
 ```
-docker compose down
+docker compose -f docker-compose-wordpress.yml down
 ```
 ## TOOLS
 
