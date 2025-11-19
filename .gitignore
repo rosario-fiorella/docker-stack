@@ -2,9 +2,9 @@
 src
 !src/index.php
 !src/health.php
-data/db/*
-!data/db/.gitkeep
-data/mysql_57/*
-!data/mysql_57/.gitkeep
+data/mysql_db/*
+!data/mysql_db/.gitkeep
+data/mysql_wp/*
+!data/mysql_wp/.gitkeep
 data/nginx/log
 !data/nginx/log/.gitkeep
